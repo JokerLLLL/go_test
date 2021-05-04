@@ -13,6 +13,7 @@ func changeArr(arr *[5]int)  {
 }
 
 //切片 slice
+// 切片的第二个值不会包含在切片中，所以索引可以最索引+1
 func sliceArr()  {
 	arr := [...]int{0,11,22,33,44,55,66}
 	s1 := arr[2:3] //半开半闭 切出 索引 2 的视图
@@ -53,17 +54,19 @@ func main() {
 	//changeArr(&arr1)
 	//fmt.Println(arr1)
 
-	sliceArr()
+	//sliceArr()
 
 	var arr = [7]int{0,1,2,3,4,5,6}
 	s1 := arr[4:6]
 	s2 := append(s1,991)
 	s3 := append(s2,992)
 	s4 := append(s3,994)
+	fmt.Println(s2,s3,s4)
 	// 超过 cap s3 s4 no longer view arr
 	// 只会改变 s1 s2  ，，  s3,s4不在受到影响 //而且新生成的 arr len()长度会以 +1 增加，而cap()长度 x2 递增
 	arr[5] = 555
 	arr[6] = 666
+	s4[2] = 191 // 说明 s4 view 同一个 arr
 	fmt.Println(arr,s1,s2,s3,s4)
 
 }
