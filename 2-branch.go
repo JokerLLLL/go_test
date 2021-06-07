@@ -4,9 +4,11 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"os"
 	"strconv"
+	"strings"
 )
 func eval(a int,b int,p string) int {
 	var result int
@@ -55,9 +57,13 @@ func printFile(filename string) {
 	if(err != nil) {
 		panic(err)
 	}
-	scanner := bufio.NewScanner(file)
+	printFileContents(file)
+}
+
+func printFileContents(r io.Reader)  {
+	scanner := bufio.NewScanner(r)
 	for scanner.Scan() {
-		fmt.Println(scanner.Text());
+		fmt.Println(scanner.Text())
 	}
 }
 
@@ -90,5 +96,12 @@ func main() {
 		convertToBin(999),
 		)
 
-	printFile("abc.txt")
+	printFile("D:\\demo\\go\\src\\go_test\\abc.txt")
+
+	s := `uu
+er""eqrq
+ffff
+cccc
+`
+	printFileContents(strings.NewReader(s))
 }
